@@ -6,6 +6,7 @@
         <tr>
             <th>NOM</th>
             <th>PRENOM</th>
+            <th>INFO</th>
         </tr>
     </thead>
     <tbody>
@@ -14,6 +15,8 @@
             <tr>
                 <td><?= $acteur["nom"] ?> </td>
                 <td><?= $acteur["prenom"] ?></td>
+                <!-- BOUTON QUI REDIRIGE L'ACTEUR SOUHAITé -->
+                <td><a href="index.php?action=detailActeur&id=<?php echo $acteur['id_acteur']; ?>"><i class="fa-solid fa-circle-info"></i></a></td>
             </tr>
         <?php } ?>
     </tbody>
