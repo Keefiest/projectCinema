@@ -2,10 +2,10 @@
 
         <?php
 
-        $film = $filmrequete->fetch();
+        $acteur = $acteurrequete->fetch();
         $castings = $castingrequete->fetchAll();
         ?>
-        <img class="affiche"src=" <?php echo $film['affiche']; ?> " alt="">
+        <img class="affiche"src=" <?php echo $acteur['photo']; ?> " alt="">
         <h2> 
                 <?php echo "Réalisateur : ".$film['realisateur'];?>
         </h2> 
@@ -27,8 +27,8 @@
 
 <?php
 
-$titre = "Détail du film ".$film['titre']." ";
-$titre_secondaire = $film['titre']." ";
+$titre = "Détail de l'acteur ".$acteur['acteur']." ";
+$titre_secondaire = $acteur['acteur']." ";
 $contenu = ob_get_clean();
 require "view/template.php";
 

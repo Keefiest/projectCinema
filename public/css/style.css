@@ -1,0 +1,12 @@
+.affiche{
+    max-width: 400px;
+}
+.photo{
+    max-width: 300px;
+}
+th{
+    padding: 1em;
+}
+td{
+    padding: 1em;
+}

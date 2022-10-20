@@ -6,6 +6,7 @@
         <tr>
             <th>NOM</th>
             <th>PRENOM</th>
+            <th>INFO</th>
         </tr>
     </thead>
     <tbody>
@@ -14,6 +15,8 @@
             <tr>
                 <td><?= $realisateur["nom"] ?> </td>
                 <td><?= $realisateur["prenom"] ?></td>
+                <!-- BOUTON QUI REDIRIGE AU REALISATEUR SOUHAITé -->
+                <td><a href="index.php?action=detailRealisateur&id=<?php echo $realisateur['id_realisateur']; ?>"><i class="fa-solid fa-circle-info"></i></a></td>
             </tr>
         <?php } ?>
     </tbody>
