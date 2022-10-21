@@ -38,7 +38,7 @@ class CinemaController {
     public function listRoles(){
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT nom_role
+            SELECT  id_role, nom_role
             FROM role 
         ");
         
@@ -48,7 +48,7 @@ class CinemaController {
     public function listGenres(){
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT nom_genre
+            SELECT nom_genre, id_genre
             FROM genre 
         ");
         
@@ -77,6 +77,7 @@ class CinemaController {
         require "view/detailFilm.php";
 
     }
+
     public function detailRealisateur($id){
         $pdo = Connect::seConnecter();
         $realrequete = $pdo->prepare("
@@ -97,6 +98,7 @@ class CinemaController {
         require "view/detailRealisateur.php";
 
     }
+
     public function detailActeur($id){
         $pdo = Connect::seConnecter();
         $acteurrequete = $pdo->prepare("
@@ -119,26 +121,48 @@ class CinemaController {
         require "view/detailActeur.php";
 
     }
+
     public function detailGenre($id){
         $pdo = Connect::seConnecter();
         $genrerequete = $pdo->prepare("
-            SELECT S acteur, photo, DATE_FORMAT(date_naissance, '%d/%m/%Y') as date_naissance_format
-            FROM acteur a
-            WHERE a.id_acteur = :id
+            SELECT nom_genre, desc_genre
+            FROM genre g
+            WHERE g.id_genre = :id
         ");
         $genrerequete->execute(["id" => $id]);
         $filmsrequete = $pdo->prepare("
-            SELECT f.titre, r.nom_role
-            FROM casting c
-            INNER JOIN acteur a ON a.id_acteur = c.id_acteur
+            SELECT g.nom_genre, c.id_genre, f.titre, DATE_FORMAT(date_sortie, '%d/%m/%Y') AS date_sortie_format
+            FROM contient c
+            INNER JOIN genre g ON g.id_genre = c.id_genre
             INNER JOIN film f ON f.id_film = c.id_film
-            INNER JOIN role r ON r.id_role = c.id_role
-            WHERE a.id_acteur = :id
+            WHERE g.id_genre = :id
             
         ");
         $filmsrequete->execute(["id" => $id]);
 
         require "view/detailGenre.php";
+
+    }
+    public function detailRole($id){
+        $pdo = Connect::seConnecter();
+        $rolerequete = $pdo->prepare("
+            SELECT nom_role, desc_role
+            FROM role r
+            WHERE r.id_role = :id
+        ");
+        $rolerequete->execute(["id" => $id]);
+        $castingsrequete = $pdo->prepare("
+            SELECT nom_role, titre, CONCAT(a.prenom, ' ', a.nom) AS acteur
+            FROM casting c
+            INNER JOIN role r ON r.id_role = c.id_role
+            INNER JOIN film f ON f.id_film = c.id_film
+            INNER JOIN acteur a ON a.id_acteur = c.id_acteur
+            WHERE r.id_role = :id
+            
+        ");
+        $castingsrequete->execute(["id" => $id]);
+
+        require "view/detailRole.php";
 
     }
 }

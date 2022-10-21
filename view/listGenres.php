@@ -5,6 +5,7 @@
     <thead>
         <tr>
             <th>GENRE</th>
+            <th>FILMS</th>
         </tr>
     </thead>
     <tbody>
@@ -12,6 +13,7 @@
         foreach($requete->fetchAll() as $genre) { ?>
             <tr>
                 <td><?= $genre["nom_genre"] ?> </td>
+                <td><a href="index.php?action=detailGenre&id=<?php echo $genre['id_genre']?>"><i class="fa-solid fa-circle-info"></i></a></td>
             </tr>
         <?php } ?>
     </tbody>

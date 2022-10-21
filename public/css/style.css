@@ -10,3 +10,7 @@ th{
 td{
     padding: 1em;
 }
+p{
+    max-width: 500px;
+    text-align: left;
+}
