@@ -14,3 +14,7 @@ p{
     max-width: 500px;
     text-align: left;
 }
+.film-header{
+    display: flex;
+    gap: 100px;
+}

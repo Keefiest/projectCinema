@@ -8,8 +8,9 @@ class CinemaController {
     public function listFilms(){
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT id_film, titre, date_sortie
-            FROM film
+            SELECT id_film, titre, DATE_FORMAT(date_sortie, '%d/%m/%Y') AS date_sortie_format,  TIME_FORMAT(SEC_TO_TIME(duree * 60), '%Hh%i') AS duree_format
+            FROM film f
+            ORDER BY date_sortie DESC
         ");
 
         require "view/listFilms.php";
@@ -19,7 +20,8 @@ class CinemaController {
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
             SELECT id_acteur, nom, prenom
-            FROM acteur 
+            FROM acteur
+            ORDER BY nom
         ");
         
         require "view/listActeurs.php";
@@ -30,6 +32,7 @@ class CinemaController {
         $requete = $pdo->query("
             SELECT id_realisateur, nom, prenom
             FROM realisateur 
+            ORDER BY nom
         ");
         
         require "view/listRealisateurs.php";
@@ -40,6 +43,7 @@ class CinemaController {
         $requete = $pdo->query("
             SELECT  id_role, nom_role
             FROM role 
+            ORDER BY nom_role
         ");
         
         require "view/listRoles.php";
@@ -50,6 +54,7 @@ class CinemaController {
         $requete = $pdo->query("
             SELECT nom_genre, id_genre
             FROM genre 
+            ORDER BY nom_genre
         ");
         
         require "view/listGenres.php";
@@ -58,7 +63,7 @@ class CinemaController {
     public function detailFilm($id){
         $pdo = Connect::seConnecter();
         $filmrequete = $pdo->prepare("
-            SELECT titre, CONCAT(r.prenom,' ',r.nom) AS realisateur, DATE_FORMAT(date_sortie, '%d/%m/%Y') AS date_sortie_format, note, TIME_FORMAT(SEC_TO_TIME(duree * 60), '%Hh%i') AS duree_format, affiche
+            SELECT titre, CONCAT(r.prenom,' ',r.nom) AS realisateur, DATE_FORMAT(date_sortie, '%d/%m/%Y') AS date_sortie_format, note, TIME_FORMAT(SEC_TO_TIME(duree * 60), '%Hh%i') AS duree_format, affiche, synopsis
             FROM film f
             INNER JOIN realisateur r ON r.id_realisateur = f.id_realisateur
             WHERE f.id_film = :id
