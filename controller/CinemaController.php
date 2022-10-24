@@ -172,6 +172,18 @@ class CinemaController {
     }
     // PAGE ADMIN
     public function Admin(){
+        $pdo = Connect::seConnecter();
+        $realisateurs = $pdo->prepare("
+            SELECT CONCAT(nom, ' ', prenom) as realisateur, id_realisateur
+            FROM realisateur r 
+        ");
+        $realisateurs->execute();
+        $genres = $pdo->prepare("
+            SELECT nom_genre, id_genre
+            FROM genre g
+        ");
+        $genres->execute();
+
         require "view/Admin.php";
     }
     // AJOUTER DES VALEURS EN BDD
@@ -207,6 +219,94 @@ class CinemaController {
 
                 header('Location:index.php?action=listGenres');
             }
+        }; 
+    }
+    public function ajouterActeur(){
+        if(isset($_POST["submit"])){
+            $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $date_naissance = filter_input(INPUT_POST, "date_naissance", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $photo = filter_input(INPUT_POST, "photo", FILTER_SANITIZE_URL);
+            
+            if($nom && $prenom && $sexe && $date_naissance && $photo ){
+                $pdo = Connect::seConnecter();
+                $insertActeur = $pdo->prepare("INSERT INTO acteur(nom, prenom, sexe, date_naissance, photo) VALUES (:nom, :prenom, :sexe, :date_naissance, :photo)");
+                $insertActeur->execute([
+                    "nom" => $nom,
+                    "prenom" => $prenom,
+                    "sexe" => $sexe,
+                    "date_naissance" => $date_naissance,
+                    "photo" => $photo
+                ]);
+
+                header('Location:index.php?action=listActeurs');
+            }
+        }; 
+    }
+    public function ajouterRealisateur(){
+        if(isset($_POST["submit"])){
+            $nom = filter_input(INPUT_POST, "nom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $prenom = filter_input(INPUT_POST, "prenom", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $date_naissance = filter_input(INPUT_POST, "date_naissance", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $sexe = filter_input(INPUT_POST, "sexe", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $photo = filter_input(INPUT_POST, "photo", FILTER_SANITIZE_URL);
+            
+            if($nom && $prenom && $sexe && $date_naissance && $photo ){
+                $pdo = Connect::seConnecter();
+                $insertActeur = $pdo->prepare("
+                    INSERT INTO realisateur(nom, prenom, date_naissance, sexe, photo) 
+                    VALUES (:nom, :prenom, :date_naissance, :sexe, :photo)
+                ");
+                $insertActeur->execute([
+                    "nom" => $nom,
+                    "prenom" => $prenom,
+                    "date_naissance" => $date_naissance,
+                    "sexe" => $sexe,
+                    "photo" => $photo
+                ]);
+
+                header('Location:index.php?action=listRealisateurs');
+            }
+        }; 
+    }
+    public function ajouterFilm(){
+
+
+        if(isset($_POST["submit"])){
+            $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $date_sortie = filter_input(INPUT_POST, "date_sortie", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $duree = filter_input(INPUT_POST, "duree", FILTER_SANITIZE_NUMBER_INT);
+            $synopsis = filter_input(INPUT_POST, "synopsis", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $note = filter_input(INPUT_POST, "note", FILTER_SANITIZE_NUMBER_INT);
+            $affiche = filter_input(INPUT_POST, "affiche", FILTER_SANITIZE_URL);
+            $id_realisateur = filter_input(INPUT_POST, "id_realisateur", FILTER_SANITIZE_NUMBER_INT);
+            
+            if($titre && $date_sortie && $duree && $synopsis && $note && $affiche && $id_realisateur ){
+                $pdo = Connect::seConnecter();
+                $insertFilm = $pdo->prepare("
+                    INSERT INTO film(titre, date_sortie, duree, synopsis, note, affiche, id_realisateur) 
+                    VALUES (:titre, :date_sortie, :duree, :synopsis, :note, :affiche, :id_realisateur)
+                ");
+                $insertFilm->execute([
+                    "titre" => $titre,
+                    "date_sortie" => $date_sortie,
+                    "duree" => $duree,
+                    "synopsis" => $synopsis,
+                    "note" => $note,
+                    "affiche" => $affiche,
+                    "id_realisateur" => $id_realisateur
+                ]);
+                $getFilmId = $pdo->prepare("
+                    SELECT id_film
+                    FROM film f
+                ");
+                $last_id = ;
+            }
+            header('Location:index.php?action=listFilms');
+
+                
+            
         }; 
     }
 }

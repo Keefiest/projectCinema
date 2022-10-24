@@ -35,8 +35,12 @@ p{
     height: 0;
     overflow: hidden;
     margin: 0;
-    transition: 2s height;
+    transition: 1s height;
 }
 .accordion-content p{
     padding: 10px;
+}
+.fl form{
+    display: flex;
+    align-items: center;
 }

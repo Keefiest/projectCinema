@@ -36,6 +36,9 @@ if(isset($_GET["action"])){
         case "Admin" : $ctrlCinema->Admin(); break;
         case "ajouterRole" : $ctrlCinema->ajouterRole(); break;
         case "ajouterGenre" : $ctrlCinema->ajouterGenre(); break;
+        case "ajouterRealisateur" : $ctrlCinema->ajouterRealisateur(); break;
+        case "ajouterActeur" : $ctrlCinema->ajouterActeur(); break;
+        case "ajouterFilm" : $ctrlCinema->ajouterFilm(); break;
             
         }
     }
