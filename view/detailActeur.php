@@ -4,6 +4,7 @@
 
         $acteur = $acteurrequete->fetch();
         $films = $filmsrequete->fetchAll();
+        
         ?>
         <img class="affiche"src=" <?php echo $acteur['photo']; ?> " alt="">
 

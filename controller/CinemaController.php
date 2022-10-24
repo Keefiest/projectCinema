@@ -63,7 +63,7 @@ class CinemaController {
     public function detailFilm($id){
         $pdo = Connect::seConnecter();
         $filmrequete = $pdo->prepare("
-            SELECT titre, CONCAT(r.prenom,' ',r.nom) AS realisateur, DATE_FORMAT(date_sortie, '%d/%m/%Y') AS date_sortie_format, note, TIME_FORMAT(SEC_TO_TIME(duree * 60), '%Hh%i') AS duree_format, affiche, synopsis
+            SELECT titre, CONCAT(r.prenom,' ',r.nom) AS realisateur, DATE_FORMAT(date_sortie, '%d/%m/%Y') AS date_sortie_format, note, TIME_FORMAT(SEC_TO_TIME(duree * 60), '%Hh%i') AS duree_format, affiche, synopsis, note
             FROM film f
             INNER JOIN realisateur r ON r.id_realisateur = f.id_realisateur
             WHERE f.id_film = :id
@@ -169,6 +169,45 @@ class CinemaController {
 
         require "view/detailRole.php";
 
+    }
+    // PAGE ADMIN
+    public function Admin(){
+        require "view/Admin.php";
+    }
+    // AJOUTER DES VALEURS EN BDD
+    public function ajouterRole(){
+        if(isset($_POST["submit"])){
+            $nom_role = filter_input(INPUT_POST, "nom_role", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $desc_role = filter_input(INPUT_POST, "desc_role", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            if($nom_role && $desc_role){
+                $pdo = Connect::seConnecter();
+                $insertRole = $pdo->prepare("INSERT INTO role(nom_role, desc_role) VALUES (:nom_role, :desc_role)");
+                $insertRole->execute([
+                    "nom_role" => $nom_role,
+                    "desc_role" => $desc_role
+                ]);
+
+                header('Location:index.php?action=listRoles');
+            }
+        };    
+    }
+    public function ajouterGenre(){
+        if(isset($_POST["submit"])){
+            $nom_genre = filter_input(INPUT_POST, "nom_genre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            $desc_genre = filter_input(INPUT_POST, "desc_genre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+            
+            if($nom_genre && $desc_genre){
+                $pdo = Connect::seConnecter();
+                $insertGenre = $pdo->prepare("INSERT INTO genre(nom_genre, desc_genre) VALUES (:nom_genre, :desc_genre)");
+                $insertGenre->execute([
+                    "nom_genre" => $nom_genre,
+                    "desc_genre" => $desc_genre
+                ]);
+
+                header('Location:index.php?action=listGenres');
+            }
+        }; 
     }
 }
 

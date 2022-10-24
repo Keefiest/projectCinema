@@ -12,16 +12,17 @@
     <div class="wrapper">
         <header>
 
-        </header>
-        <main>
-            <div id="contenu">
-                <h1>PDO Cinema</h1>
+            </header>
+            <main>
+                <div id="contenu">
+                    <h1>PDO Cinema</h1>
                 <h2><?= $titre_secondaire ?></h2>
                 <?= $contenu ?>
             </div>
-
+            
         </main>
     </div>
     
+    <script src="public/js/main.js"></script>
 </body>
 </html>

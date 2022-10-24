@@ -5,6 +5,7 @@
                     <a href="?action=listRealisateurs">Réalisateurs</a>
                     <a href="?action=listRoles">Rôles</a>
                     <a href="?action=listGenres">Genres</a>
+                    <a href="?action=Admin">Admin</a>
                 </ul>
             </nav>
 
@@ -32,8 +33,12 @@ if(isset($_GET["action"])){
         case "detailActeur" : $ctrlCinema->detailActeur($id); break;
         case "detailGenre" : $ctrlCinema->detailGenre($id); break;
         case "detailRole" : $ctrlCinema->detailRole($id); break;
+        case "Admin" : $ctrlCinema->Admin(); break;
+        case "ajouterRole" : $ctrlCinema->ajouterRole(); break;
+        case "ajouterGenre" : $ctrlCinema->ajouterGenre(); break;
+            
+        }
     }
-}
 
 
 ?>

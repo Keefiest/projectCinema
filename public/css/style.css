@@ -18,3 +18,25 @@ p{
     display: flex;
     gap: 100px;
 }
+.checked {
+    color: orange;
+}
+/* ACCORDEON DU PANEL ADMIN */
+.accordion-element{
+    border: 1px solid grey;
+}
+.accordion-element h3{
+    color: blue;
+    padding: 10px;
+    margin: 0;
+    border: 1px solid grey;
+}
+.accordion-content{
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    transition: 2s height;
+}
+.accordion-content p{
+    padding: 10px;
+}

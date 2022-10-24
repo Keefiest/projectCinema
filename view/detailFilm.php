@@ -24,6 +24,48 @@
                         <h3>
                               Durée : <?php echo $film['duree_format'];?>  
                         </h3>
+
+                        <h3>
+                                Note : 
+                                <?php 
+                                        if ($film['note'] == '1'){
+                                                echo '<span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>';
+                                        }
+                                        elseif($film['note'] == '2'){
+                                                echo '<span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>';
+                                        }
+                                        elseif($film['note'] == '3'){
+                                                echo '<span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>
+                                                <span class="fa fa-star"></span>';
+                                        }
+                                        elseif($film['note'] == '4'){
+                                                echo '<span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star"></span>';
+                                        }
+                                        elseif($film['note'] == '5'){
+                                                echo '<span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>
+                                                <span class="fa fa-star checked"></span>';
+                                        }
+                                
+                                ?>
+                        </h3>
                 </div>
         </div>
         <h2>
