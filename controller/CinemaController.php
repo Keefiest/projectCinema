@@ -8,7 +8,7 @@ class CinemaController {
     public function listFilms(){
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT id_film, titre, DATE_FORMAT(date_sortie, '%d/%m/%Y') AS date_sortie_format,  TIME_FORMAT(SEC_TO_TIME(duree * 60), '%Hh%i') AS duree_format
+            SELECT id_film, titre, DATE_FORMAT(date_sortie, '%d/%m/%Y') AS date_sortie_format,  TIME_FORMAT(SEC_TO_TIME(duree * 60), '%Hh%i') AS duree_format, affiche
             FROM film f
             ORDER BY date_sortie DESC
         ");

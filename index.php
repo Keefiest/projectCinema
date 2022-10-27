@@ -1,4 +1,7 @@
+            
+  
             <nav>
+                <h1>PDO Cinéma</h1>
                 <ul>
                     <a href="?action=listFilms">Films</a>
                     <a href="?action=listActeurs">Acteurs</a>

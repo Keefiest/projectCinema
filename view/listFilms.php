@@ -1,26 +1,22 @@
 <?php ob_start(); ?>
 <p> Il y a <?= $requete->rowCount() ?> films</p>
 
-<table>
-    <thead>
-        <tr>
-            <th>TITRE</th>
-            <th>ANNEE SORTIE</th>
-            <th>INFO</th>
-        </tr>
-    </thead>
-    <tbody>
+    <section class="cards">
         <?php
         foreach($requete->fetchAll() as $film) { ?>
-            <tr>
-                <td><?= $film["titre"] ?></td>
-                <td><?= $film["date_sortie_format"] ?></td>
-                <!-- BOUTON QUI REDIRIGE AU FILM SOUHAITé -->
-                <td><a href="index.php?action=detailFilm&id=<?php echo $film['id_film'] ?>"><i class="fa-solid fa-circle-info"></i></a></td>
-            </tr>
+            <div class="card">
+                <figure>
+                    <a href="index.php?action=detailFilm&id=<?php echo $film['id_film'] ?>">
+                        <img class="mini-img" src="<?php echo $film['affiche'];?>" alt="">
+                        <figcaption>                        
+                            <?= $film["titre"] ?>
+                            (<?= $film["date_sortie_format"] ?>) 
+                        </figcaption>
+                    </a>            
+                </figure>
+            </div>
         <?php } ?>
-    </tbody>
-</table>
+    </section>
 
 <?php
 
