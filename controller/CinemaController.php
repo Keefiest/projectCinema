@@ -19,7 +19,7 @@ class CinemaController {
     public function listActeurs(){
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT id_acteur, nom, prenom
+            SELECT id_acteur, nom, prenom, photo
             FROM acteur
             ORDER BY nom
         ");
@@ -30,7 +30,7 @@ class CinemaController {
     public function listRealisateurs(){
         $pdo = Connect::seConnecter();
         $requete = $pdo->query("
-            SELECT id_realisateur, nom, prenom
+            SELECT id_realisateur, nom, prenom, photo
             FROM realisateur 
             ORDER BY nom
         ");
@@ -183,6 +183,10 @@ class CinemaController {
             FROM genre g
         ");
         $genres->execute();
+        $films = $pdo->prepare("
+            SELECT titre, id_film
+            FROM film f
+        ");
 
         require "view/Admin.php";
     }
@@ -316,6 +320,25 @@ class CinemaController {
                 
             
         }; 
+    }
+    public function associerFilmGenre(){
+        if(isset($_POST['submit'])){
+            $id_film = filter_input(INPUT_POST, 'id_film', FILTER_SANITIZE_NUMBER_INT);
+            $id_genre = filter_input(INPUT_POST, 'id_genre', FILTER_SANITIZE_NUMBER_INT);
+            if($id_film && $id_genre){
+                $pdo= Connect::seConnecter();
+                $insertAssocierFilmGenre = $pdo->prepare("
+                    INSERT INTO contient (id_film, id_genre)
+                    VALUES (:id_film, :id_genre)
+                ");
+                $insertAssocierFilmGenre->execute([
+                    "id_film" => $id_film,
+                    "id_genre" => $id_genre
+                ]);
+            }
+            header('Location:index.php?action=listGenres');
+        }
+
     }
 }
 

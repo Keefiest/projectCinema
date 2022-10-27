@@ -1,15 +1,22 @@
 <?php ob_start(); ?>
 <p> Il y a <?= $requete->rowCount() ?> acteurs</p>
 
-    <section></section>
+    <section class="acteur-cards">
         <?php
         foreach($requete->fetchAll() as $acteur) { ?>
+            <div class="acteur-card">
                 <a href="index.php?action=detailActeur&id=<?php echo $acteur['id_acteur']; ?>">
-                    <?= $acteur["nom"] ?> 
-                    <?= $acteur["prenom"] ?>
+                    <figure>
+                        <img class="mini-img-acteur"src="<?php echo $acteur['photo']?>" alt="">
+                        <figcaption>
+                            <?= $acteur["prenom"] ?>
+                            <?= $acteur["nom"] ?> 
+                        </figcaption>
+                    </figure>
                 </a>
+            </div>
         <?php } ?>
-    
+    </section>
 
 <?php
 

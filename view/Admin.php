@@ -166,7 +166,7 @@
                 <p>
                     <label>
                         Note</br>
-                        <input type="number" min="0" max="5" name="note" placeholder="?/5" required="required"></textarea>
+                        <input type="number" min="0" max="5" name="note" placeholder="?/5" required="required"  ></textarea>
                     </label>
                 </p>
                 <p>
@@ -206,9 +206,28 @@
                         <input type="submit" name="submit" value="Ajouter">
                     </label>
                 </p>
-            </form>
+            </form>   
         </div>
     </div>
+    <div class="accordion-element">
+        <h3 class="accordion-header">Associer un genre et un film</h3>
+        <div class="accordion-content">
+            <form action="index.php?action=associerFilmGenre" method="POST">
+                <p>
+                    <label>
+                                <select name="id_film">']?>
+                                    <?php 
+                                        foreach($films AS $film){
+                                        echo "<option value=".$film['id_film'].">".$film['titre']."</option>";
+                                        }
+                                    
+                                    ?>
+                                </select>
+                            </label>
+                </p>
+            
+            </form>
+        </div>
 </div>
 
 
