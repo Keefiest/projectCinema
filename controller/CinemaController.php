@@ -200,8 +200,8 @@ class CinemaController {
                     "desc_role" => $desc_role
                 ]);
 
-                header('Location:index.php?action=listRoles');
             }
+            header('Location:index.php?action=listRoles');
         };    
     }
     public function ajouterGenre(){
@@ -217,8 +217,8 @@ class CinemaController {
                     "desc_genre" => $desc_genre
                 ]);
 
-                header('Location:index.php?action=listGenres');
             }
+            header('Location:index.php?action=listGenres');
         }; 
     }
     public function ajouterActeur(){
@@ -240,8 +240,8 @@ class CinemaController {
                     "photo" => $photo
                 ]);
 
-                header('Location:index.php?action=listActeurs');
             }
+            header('Location:index.php?action=listActeurs');
         }; 
     }
     public function ajouterRealisateur(){
@@ -272,7 +272,6 @@ class CinemaController {
     }
     public function ajouterFilm(){
 
-
         if(isset($_POST["submit"])){
             $titre = filter_input(INPUT_POST, "titre", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
             $date_sortie = filter_input(INPUT_POST, "date_sortie", FILTER_SANITIZE_FULL_SPECIAL_CHARS);
@@ -281,8 +280,9 @@ class CinemaController {
             $note = filter_input(INPUT_POST, "note", FILTER_SANITIZE_NUMBER_INT);
             $affiche = filter_input(INPUT_POST, "affiche", FILTER_SANITIZE_URL);
             $id_realisateur = filter_input(INPUT_POST, "id_realisateur", FILTER_SANITIZE_NUMBER_INT);
+            $genres = filter_input(INPUT_POST, "genres", FILTER_DEFAULT, FILTER_REQUIRE_ARRAY);
             
-            if($titre && $date_sortie && $duree && $synopsis && $note && $affiche && $id_realisateur ){
+            if($titre && $date_sortie && $duree && $synopsis && $note && $affiche && $id_realisateur && $genres){
                 $pdo = Connect::seConnecter();
                 $insertFilm = $pdo->prepare("
                     INSERT INTO film(titre, date_sortie, duree, synopsis, note, affiche, id_realisateur) 
@@ -297,11 +297,19 @@ class CinemaController {
                     "affiche" => $affiche,
                     "id_realisateur" => $id_realisateur
                 ]);
-                $getFilmId = $pdo->prepare("
-                    SELECT id_film
-                    FROM film f
-                ");
-                $last_id = ;
+                $last_film = $pdo->lastInsertId();
+                foreach($genres as $genre){
+                    $insertFilmGenres = $pdo->prepare("
+                    INSERT INTO contient(id_film, id_genre)
+                    VALUES (:last_film, :id_genre)
+                    ");
+                    $insertFilmGenres->execute([
+                        "last_film" => $last_film,
+                        "id_genre" => $genre
+                        
+                    ]);
+                }
+                
             }
             header('Location:index.php?action=listFilms');
 

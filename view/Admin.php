@@ -7,13 +7,13 @@
                 <p>
                     <label>
                         Nom du rôle</br>
-                        <input type="text" name="nom_role">
+                        <input type="text" name="nom_role" required="required">
                     </label> 
                 </p>
                 <p>
                     <label>
                         Description du rôle</br>
-                        <textarea type="textarea" name="desc_role"></textarea>
+                        <textarea type="textarea" name="desc_role" required="required"></textarea>
                     </label>
                 </p>
                 <p>
@@ -31,13 +31,13 @@
                 <p>
                     <label>
                         Nom du genre</br>
-                        <input type="text" name="nom_genre">
+                        <input type="text" name="nom_genre" required="required">
                     </label> 
                 </p>
                 <p>
                     <label>
                         Description du genre</br>
-                        <textarea type="textarea" name="desc_genre"></textarea>
+                        <textarea type="textarea" name="desc_genre" required="required"></textarea>
                     </label>
                 </p>
                 <p>
@@ -55,32 +55,32 @@
                 <p>
                     <label>
                         Nom</br>
-                        <input type="text" name="nom">
+                        <input type="text" name="nom" required="required">
                     </label> 
                 </p>
                 <p>
                     <label>
                         Prenom</br>
-                        <input type="text" name="prenom"></input>
+                        <input type="text" name="prenom" required="required"></input>
                     </label>
                 </p>
               
                 <p>
                     <label>
                         Sexe</br>
-                        <input type="text" name="sexe" placeholder="Homme ou Femme"></input>
+                        <input type="text" name="sexe" placeholder="Homme ou Femme" required="required"></input>
                     </label>
                 </p>
                 <p>
                     <label>
                         Date de naissance</br>
-                        <input type="date" name="date_naissance"></input>
+                        <input type="date" name="date_naissance" required="required"></input>
                     </label>
                 </p>
                 <p>
                     <label>
                         Photo</br>
-                        <textarea type="textarea" name="photo" placeholder="Sous forme de lien"></textarea>
+                        <textarea type="textarea" name="photo" placeholder="Sous forme de lien" required="required"></textarea>
                     </label>
                 </p>
                 <p>
@@ -98,32 +98,32 @@
                 <p>
                     <label>
                         Nom</br>
-                        <input type="text" name="nom">
+                        <input type="text" name="nom" required="required">
                     </label> 
                 </p>
                 <p>
                     <label>
                         Prenom</br>
-                        <input type="text" name="prenom"></input>
+                        <input type="text" name="prenom" required="required"></input>
                     </label>
                 </p>
                 <p>
                     <label>
                         Date de naissance</br>
-                        <input type="date" name="date_naissance"></input>
+                        <input type="date" name="date_naissance" required="required"></input>
                     </label>
                 </p>
                 <p>
                     <label>
                         Sexe</br>
-                        <input type="text" name="sexe" placeholder="Homme ou Femme"></input>
+                        <input type="text" name="sexe" placeholder="Homme ou Femme" required="required"></input>
                     </label>
                 </p>
                 
                 <p>
                     <label>
                         Photo</br>
-                        <textarea type="textarea" name="photo" placeholder="Sous forme de lien"></textarea>
+                        <textarea type="textarea" name="photo" placeholder="Sous forme de lien" required="required"></textarea>
                     </label>
                 </p>
                 <p>
@@ -141,32 +141,32 @@
                 <p>
                     <label>
                         Titre</br>
-                        <input type="text" name="titre">
+                        <input type="text" name="titre" required="required">
                     </label> 
                 </p>
                 <p>
                     <label>
                         Date de sortie</br>
-                        <input type="date" name="date_sortie"></input>
+                        <input type="date" name="date_sortie" required="required"></input>
                     </label>
                 </p>
                 <p>
                     <label>
                         Durée</br>
-                        <input type="number" name="duree" placeholder="En minutes"></input>
+                        <input type="number" name="duree" placeholder="En minutes" required="required"></input>
                     </label>
                 </p>
                 <p>
                     <label>
                         Synopsis</br>
-                        <textarea type="text" name="synopsis" ></textarea>
+                        <textarea type="text" name="synopsis" required="required"></textarea>
                     </label>
                 </p>
                 
                 <p>
                     <label>
                         Note</br>
-                        <input type="number" min="0" max="5" name="note" placeholder="?/5"></textarea>
+                        <input type="number" min="0" max="5" name="note" placeholder="?/5" required="required"></textarea>
                     </label>
                 </p>
                 <p>
@@ -182,20 +182,19 @@
                         </select>
                     </label>
                 </p>
-                <!-- <p>
+                <p>
                     <label>
                         Genre</br>
                        
                         <select name="genres[]" multiple>
                             <?php
-
-                            // foreach($genres AS $genre){
-                            //     echo "<option value='nom_genre'>".$genre['nom_genre']."</option>";
-                            // }
+                            foreach($genres AS $genre){
+                                echo "<option value=".$genre['id_genre'].">".$genre['nom_genre']."</option>";
+                            }
                             ?>
                         </select>
                     </label>
-                </p> -->
+                </p>
                 <p>
                     <label>
                         Affiche</br>
